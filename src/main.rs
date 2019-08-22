@@ -28,7 +28,7 @@ const TIMESTAMP_LEFT_SHIFT: u64 = SEQUENCE_BITS + WORKER_ID_BITS + DATACENTER_ID
 
 fn main() {
     let mut arg = env::args().nth(1).expect("no twitter image id provided");
-    if arg.len() > 15 {
+    if arg.len() != 15 {
         panic!("id is the wrong number of characters")
     }
     arg.push_str("A");
@@ -49,6 +49,9 @@ fn main() {
 
     println!("snowflake: {:x}", snowflake);
     println!("timestamp: {}", timestamp);
-    println!("datacenter id: {}, worker id: {}, sequence_id: {}", datacenter_id, worker_id, sequence);
+    println!(
+        "datacenter id: {}, worker id: {}, sequence_id: {}",
+        datacenter_id, worker_id, sequence
+    );
     println!("extra bytes: {:x?}", &buf[8..12]);
 }
